@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Macrodex-it Solutions Pvt Ltd</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0a1628;
+      --accent: #0066ff;
+      --accent2: #00c8ff;
+      --light: #f4f8ff;
+      --text: #1a2340;
+      --muted: #5a6a85;
+      --white: #ffffff;
+      --border: #e0e8f5;
+      --gradient: linear-gradient(135deg, #0a1628 0%, #0d2148 60%, #0a3060 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== TOP BAR ===== */
+    .topbar {
+      background: var(--primary);
+      color: #aac0e0;
+      font-size: 13px;
+      padding: 8px 0;
+    }
+    .topbar-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .topbar a { color: #aac0e0; text-decoration: none; margin-left: 20px; }
+    .topbar a:hover { color: var(--accent2); }
+    .topbar span { color: var(--accent2); margin-right: 6px; }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .logo {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 4px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { background: var(--light); color: var(--accent); }
+    .btn-quote {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 10px 20px !important;
+      border-radius: 8px !important;
+      font-weight: 600 !important;
+    }
+    .btn-quote:hover { background: #0052cc !important; color: white !important; }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: 0.3s; }
+
+    /* ===== HERO SLIDER ===== */
+    .hero {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      background: var(--gradient);
+    }
+    .slides { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(.4,0,.2,1); }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      position: relative;
+    }
+    .slide::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,102,255,0.15) 0%, transparent 70%);
+    }
+    .slide-content { position: relative; z-index: 2; max-width: 720px; }
+    .slide-tag {
+      display: inline-block;
+      background: rgba(0,200,255,0.15);
+      color: var(--accent2);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,200,255,0.3);
+      margin-bottom: 20px;
+    }
+    .slide h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .slide h1 em { color: var(--accent2); font-style: normal; }
+    .slide p {
+      color: rgba(255,255,255,0.75);
+      font-size: 17px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .slide-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+    .btn-primary:hover { background: #0052cc; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* Slider controls */
+    .slider-dots {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .dot.active { background: var(--accent2); width: 24px; border-radius: 4px; }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      z-index: 10;
+      font-size: 18px;
+    }
+    .slider-arrow:hover { background: var(--accent); }
+    .arrow-left { left: 20px; }
+    .arrow-right { right: 20px; }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 80px 24px; }
+    .container { max-width: 1200px; margin: auto; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .section-title span { color: var(--accent); }
+    .section-desc {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    .divider {
+      width: 48px; height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 20px 0;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .about-img-placeholder {
+      background: var(--gradient);
+      height: 400px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-badge-icon { font-size: 28px; }
+    .about-badge strong { display: block; font-size: 20px; color: var(--accent); font-weight: 700; }
+    .about-badge small { color: var(--muted); font-size: 12px; }
+
+    /* Stats bar */
+    .stats-bar {
+      background: var(--gradient);
+      padding: 56px 24px;
+    }
+    .stats-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-item { color: white; }
+    .stat-number {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1;
+    }
+    .stat-plus { font-size: 36px; vertical-align: top; margin-top: 8px; display: inline-block; }
+    .stat-label { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ===== CLIENTS MARQUEE ===== */
+    .clients-section { background: var(--light); padding: 60px 0; }
+    .clients-inner { max-width: 1200px; margin: auto; padding: 0 24px; text-align: center; }
+    .marquee-wrap { overflow: hidden; margin-top: 36px; }
+    .marquee-track {
+      display: flex;
+      gap: 32px;
+      animation: marquee 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .client-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 32px;
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    .client-card:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 4px 16px rgba(0,102,255,0.1); }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ===== WHY CHOOSE ===== */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .why-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .why-card:hover { box-shadow: 0 12px 40px rgba(0,102,255,0.1); transform: translateY(-4px); }
+    .why-card:hover::before { transform: scaleX(1); }
+    .why-icon {
+      width: 56px; height: 56px;
+      background: var(--light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    .why-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: var(--primary); }
+    .why-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    /* ===== OFFERINGS ===== */
+    .offerings-bg { background: var(--light); }
+    .offerings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .offering-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      transition: 0.3s;
+    }
+    .offering-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,102,255,0.1); }
+    .offering-icon { font-size: 40px; margin-bottom: 16px; }
+    .offering-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .offering-card ul { list-style: none; }
+    .offering-card ul li {
+      padding: 5px 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      padding-left: 18px;
+      position: relative;
+    }
+    .offering-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 11px;
+      top: 6px;
+    }
+
+    /* ===== ALLIANCES ===== */
+    .alliances-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .alliance-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .alliance-card:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(0,102,255,0.1); }
+    .alliance-logo { font-size: 36px; margin-bottom: 12px; }
+    .alliance-card h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 10px; }
+    .alliance-card ul { list-style: none; text-align: left; }
+    .alliance-card ul li {
+      font-size: 12.5px;
+      color: var(--muted);
+      padding: 3px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+    .alliance-card ul li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ===== CAREERS ===== */
+    .careers-section { background: var(--gradient); padding: 80px 24px; text-align: center; }
+    .careers-section .section-label { color: var(--accent2); }
+    .careers-section .section-title { color: white; }
+    .careers-section .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 36px; }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .contact-icon {
+      width: 48px; height: 48px;
+      background: var(--light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-info-item h4 { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+    .contact-info-item p { font-size: 15px; font-weight: 500; color: var(--primary); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      background: white;
+      width: 100%;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus { border-color: var(--accent); }
+    .contact-form textarea { resize: vertical; min-height: 120px; }
+    .btn-send {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+    .btn-send:hover { background: #0052cc; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 24px 32px;
+    }
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 14px; line-height: 1.8; margin: 16px 0 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .social-icon:hover { background: var(--accent); }
+    footer h4 { color: white; font-size: 15px; font-weight: 600; margin-bottom: 20px; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 10px; }
+    footer ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: 0.2s; }
+    footer ul li a:hover { color: var(--accent2); }
+    .newsletter-form { display: flex; gap: 8px; margin-top: 16px; }
+    .newsletter-form input {
+      flex: 1;
+      padding: 11px 14px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 13px;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .newsletter-form input:focus { border-color: var(--accent); }
+    .newsletter-form button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .newsletter-form button:hover { background: #0052cc; }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .why-grid, .offerings-grid { grid-template-columns: 1fr 1fr; }
+      .alliances-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      .why-grid, .offerings-grid, .alliances-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero { height: 480px; }
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 12px 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* Scroll to top */
+    .scroll-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      background: var(--accent);
+      color: white;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 16px rgba(0,102,255,0.4);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+      text-decoration: none;
+    }
+    .scroll-top.visible { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Welcome to Macrodex Technologies Pvt Ltd</span>
+    <div>
+      <a href="mailto:info@macrodex.in"><span>✉</span> info@macrodex.in</a>
+      <a href="tel:+913340001234"><span>📞</span> +91 33 4000 1234</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">MACRO<span>DEX</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#clients">Our Clients</a></li>
+      <li><a href="#alliances">Our Alliances</a></li>
+      <li><a href="#offerings">Our Offerings</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#contact" class="btn-quote">Get A Quote</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#about" onclick="toggleMenu()">About Us</a>
+    <a href="#clients" onclick="toggleMenu()">Our Clients</a>
+    <a href="#alliances" onclick="toggleMenu()">Our Alliances</a>
+    <a href="#offerings" onclick="toggleMenu()">Our Offerings</a>
+    <a href="#careers" onclick="toggleMenu()">Careers</a>
+    <a href="#contact" onclick="toggleMenu()">Contact Us</a>
+  </div>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero" id="home">
+  <div class="slides" id="slides">
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-tag">Legacy to Cloud IT</div>
+        <h1>Welcome to <em>Macrodex</em></h1>
+        <p>Transforming businesses through cutting-edge IT infrastructure, cloud solutions, and next-generation technologies.</p>
+        <div class="slide-btns">
+          <a href="#contact" class="btn-primary">Get A Quote</a>
+          <a href="#about" class="btn-outline">Know More</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-tag">Cyber Security</div>
+        <h1>Protecting Your <em>Digital Assets</em></h1>
+        <p>Enterprise-grade cybersecurity solutions from endpoint protection to full network security audits.</p>
+        <div class="slide-btns">
+          <a href="#offerings" class="btn-primary">Explore Offerings</a>
+          <a href="#contact" class="btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-tag">Cloud & Infrastructure</div>
+        <h1>Scalable <em>Cloud Solutions</em></h1>
+        <p>Hybrid multi-cloud services, migration support, and private cloud security for modern enterprises.</p>
+        <div class="slide-btns">
+          <a href="#offerings" class="btn-primary">View Solutions</a>
+          <a href="#contact" class="btn-outline">Talk to Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-content">
+        <div class="slide-tag">Single Point IT Provider</div>
+        <h1>Your Complete <em>IT Partner</em></h1>
+        <p>From consumables to cloud — a single trusted partner for all your IT challenges and future growth.</p>
+        <div class="slide-btns">
+          <a href="#contact" class="btn-primary">Get Started</a>
+          <a href="#clients" class="btn-outline">Our Clients</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slider-arrow arrow-left" onclick="changeSlide(-1)">‹</div>
+  <div class="slider-arrow arrow-right" onclick="changeSlide(1)">›</div>
+  <div class="slider-dots" id="dots"></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="about-img-placeholder">🖥️</div>
+        <div class="about-badge">
+          <div class="about-badge-icon">🏆</div>
+          <div>
+            <strong>20+</strong>
+            <small>Years of Excellence</small>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Welcome To <span>Our Company</span></h2>
+        <div class="divider"></div>
+        <p class="section-desc">Macrodex is a legacy-to-cloud IT infrastructure company designed to service all IT and related requirements of medium and large organisations. We specialize in assisting companies to select, integrate, and implement the latest technologies which empower companies to achieve more.</p>
+        <br>
+        <p class="section-desc">As a single-point provider, we handle everything from hardware procurement and networking to cloud migration and cybersecurity — so you can focus on your core business.</p>
+        <br>
+        <a href="#contact" class="btn-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="500">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="12">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label">Branch Offices</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="200">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label">Total Products</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="20">0</span><span class="stat-plus">+</span></div>
+      <div class="stat-label">Years of Experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- CLIENTS -->
+<section id="clients" class="clients-section">
+  <div class="clients-inner">
+    <div class="section-label">Trusted By</div>
+    <h2 class="section-title">Our <span>Clients</span></h2>
+    <div class="divider" style="margin: 16px auto;"></div>
+    <p class="section-desc" style="margin: 0 auto;">Proud to serve some of India's leading organisations across sectors.</p>
+    <div class="marquee-wrap">
+      <div class="marquee-track" id="marquee">
+        <div class="client-card">Tata Steel</div>
+        <div class="client-card">Wipro</div>
+        <div class="client-card">HCL Technologies</div>
+        <div class="client-card">Infosys</div>
+        <div class="client-card">Bajaj Finance</div>
+        <div class="client-card">HDFC Bank</div>
+        <div class="client-card">ITC Limited</div>
+        <div class="client-card">Coal India</div>
+        <div class="client-card">SAIL</div>
+        <div class="client-card">Reliance Industries</div>
+        <div class="client-card">Adani Group</div>
+        <div class="client-card">SBI</div>
+        <div class="client-card">BPCL</div>
+        <div class="client-card">ONGC</div>
+        <div class="client-card">Air India</div>
+        <!-- Duplicate for infinite loop -->
+        <div class="client-card">Tata Steel</div>
+        <div class="client-card">Wipro</div>
+        <div class="client-card">HCL Technologies</div>
+        <div class="client-card">Infosys</div>
+        <div class="client-card">Bajaj Finance</div>
+        <div class="client-card">HDFC Bank</div>
+        <div class="client-card">ITC Limited</div>
+        <div class="client-card">Coal India</div>
+        <div class="client-card">SAIL</div>
+        <div class="client-card">Reliance Industries</div>
+        <div class="client-card">Adani Group</div>
+        <div class="client-card">SBI</div>
+        <div class="client-card">BPCL</div>
+        <div class="client-card">ONGC</div>
+        <div class="client-card">Air India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section id="why">
+  <div class="container">
+    <div class="section-label">Why Us</div>
+    <h2 class="section-title">Why Choose <span>Macrodex?</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">Macrodex is positioned as a single point provider of all your IT infrastructure challenges — from consumables to cloud-based services.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h3>Single Point Provider</h3>
+        <p>One partner for all IT needs — hardware, software, networking, cloud, and security. No vendor juggling.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h3>Enterprise Security</h3>
+        <p>Comprehensive cybersecurity from endpoint protection to full network audits and compliance management.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">☁️</div>
+        <h3>Cloud Expertise</h3>
+        <p>Hybrid & multi-cloud services with seamless migration support for HPE, Microsoft, and Fortinet environments.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Fast Deployment</h3>
+        <p>Rapid implementation teams ensure minimal downtime and fast go-live for all technology rollouts.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h3>Premium Alliances</h3>
+        <p>Authorised partners with HP, Dell, Lenovo, Cisco, Adobe, APC and more — ensuring genuine products and support.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <h3>20+ Years Legacy</h3>
+        <p>Decades of proven experience serving 500+ corporate clients across India with consistent excellence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section id="offerings" class="offerings-bg">
+  <div class="container">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Our <span>Offerings</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">Comprehensive technology solutions from infrastructure to cloud — all under one roof.</p>
+    <div class="offerings-grid">
+      <div class="offering-card">
+        <div class="offering-icon">🔐</div>
+        <h3>Cyber Security</h3>
+        <ul>
+          <li>Endpoint & Email Security (Trend Micro)</li>
+          <li>Next Gen Firewall (Entry to High-End)</li>
+          <li>Network Security Solutions</li>
+          <li>Cyber Security Auditing (Dell)</li>
+          <li>Cloud Security & Compliance (HPE/Fortinet)</li>
+          <li>Security Monitoring (FortiGate/Kaspersky)</li>
+        </ul>
+      </div>
+      <div class="offering-card">
+        <div class="offering-icon">🌐</div>
+        <h3>Network Offerings</h3>
+        <ul>
+          <li>Structured Copper & OFC Networking</li>
+          <li>Switches & Routers (Cisco/HPE/D-Link)</li>
+          <li>Indoor & Outdoor Wireless Networking</li>
+          <li>Campus Wide Wireless Connectivity</li>
+          <li>Racks & Cages (Netrack/APC)</li>
+          <li>Networking Tools & Accessories</li>
+        </ul>
+      </div>
+      <div class="offering-card">
+        <div class="offering-icon">🖥️</div>
+        <h3>Server & Storage</h3>
+        <ul>
+          <li>Tower, Rack & Blade Servers (HP/Dell/Lenovo)</li>
+          <li>Application, DB & Mail Servers</li>
+          <li>Backup Solutions (Dell/Acronis)</li>
+          <li>NAS & SAN Storage (Dell EMC/HPE)</li>
+          <li>RAID & NAS Implementation</li>
+        </ul>
+      </div>
+      <div class="offering-card">
+        <div class="offering-icon">☁️</div>
+        <h3>Cloud Offerings</h3>
+        <ul>
+          <li>Cloud Solutions (HPE)</li>
+          <li>Hybrid & Multi-Cloud Services</li>
+          <li>Cloud Migration Support</li>
+          <li>Microsoft Cloud Computing Services</li>
+          <li>Private & Public Cloud Security (Fortinet)</li>
+          <li>Managed Backup on Cloud (Dell)</li>
+        </ul>
+      </div>
+      <div class="offering-card">
+        <div class="offering-icon">💻</div>
+        <h3>Personal Computing</h3>
+        <ul>
+          <li>Laptops (HP/Dell/Lenovo/Acer)</li>
+          <li>Desktops & All-in-Ones</li>
+          <li>Thin Clients (HP/Dell)</li>
+          <li>Workstations (HP/Dell)</li>
+          <li>Tablets (Samsung/Lenovo)</li>
+        </ul>
+      </div>
+      <div class="offering-card">
+        <div class="offering-icon">🔋</div>
+        <h3>Backup Power</h3>
+        <ul>
+          <li>Line Interactive UPS (APC/Numeric)</li>
+          <li>Online UPS 600VA – 8000KVA</li>
+          <li>Modular UPS Systems</li>
+          <li>Datacenter UPS Solutions</li>
+          <li>Annual Maintenance Services</li>
+          <li>UPS with Isolation Transformer</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;">
+      <a href="#contact" class="btn-primary">Know More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ALLIANCES -->
+<section id="alliances">
+  <div class="container">
+    <div class="section-label">Partners</div>
+    <h2 class="section-title">Our <span>Alliances</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">Authorised partner with India's most trusted technology brands.</p>
+    <div class="alliances-grid">
+      <div class="alliance-card">
+        <div class="alliance-logo">💻</div>
+        <h4>HP / Dell / Lenovo</h4>
+        <ul>
+          <li>Laptops & Desktops</li>
+          <li>Workstations & Servers</li>
+          <li>Thin Clients & Storage</li>
+          <li>Cyber Security (Dell)</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🌐</div>
+        <h4>Cisco / HPE / D-Link</h4>
+        <ul>
+          <li>Routers & Switches</li>
+          <li>Wireless Access Points</li>
+          <li>Structured Networking</li>
+          <li>Cloud Infrastructure</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🎨</div>
+        <h4>Adobe</h4>
+        <ul>
+          <li>Photoshop & Illustrator</li>
+          <li>InDesign & Acrobat</li>
+          <li>Premiere Pro</li>
+          <li>Adobe Express</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🔋</div>
+        <h4>APC / Numeric</h4>
+        <ul>
+          <li>Home & Line Interactive UPS</li>
+          <li>Online UPS (Single/3-Phase)</li>
+          <li>Modular UPS Systems</li>
+          <li>Servo Stabilizers</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🏛️</div>
+        <h4>Netrack / Valrack</h4>
+        <ul>
+          <li>Datacenter Rack Solutions</li>
+          <li>High Density Rack Closures</li>
+          <li>Cable Management</li>
+          <li>Outdoor Cabinets</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🤖</div>
+        <h4>Prama / AI Partners</h4>
+        <ul>
+          <li>AI & Banking Solutions</li>
+          <li>ATM Network Solutions</li>
+          <li>Healthcare & Retail IT</li>
+          <li>Traffic & Transport Solutions</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">🛡️</div>
+        <h4>Trend Micro / Fortinet</h4>
+        <ul>
+          <li>Endpoint Security</li>
+          <li>Network Security</li>
+          <li>Cloud Security</li>
+          <li>Threat Intelligence</li>
+        </ul>
+      </div>
+      <div class="alliance-card">
+        <div class="alliance-logo">💾</div>
+        <h4>Acronis / Dell EMC</h4>
+        <ul>
+          <li>Backup & Recovery</li>
+          <li>Cloud Backup (Managed)</li>
+          <li>SAN & NAS Storage</li>
+          <li>Data Protection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<div class="careers-section" id="careers">
+  <div class="container" style="max-width: 700px; text-align: center;">
+    <div class="section-label">Join Us</div>
+    <h2 class="section-title">Grow Your Career <span style="color: var(--accent2);">With Macrodex</span></h2>
+    <div class="divider" style="margin: 20px auto;"></div>
+    <p class="section-desc">We're always looking for talented, passionate individuals to join our growing team. Work on cutting-edge technologies and make an impact.</p>
+    <br><br>
+    <a href="#contact" class="btn-primary" style="font-size: 16px; padding: 16px 36px;">View Open Positions →</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Contact <span>Us</span></h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="section-desc" style="margin-bottom: 36px;">Reach out to us for any IT requirement, quote request, or consultation. Our team is ready to assist you.</p>
+        <div class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Phone Numbers</h4>
+            <p>Board: (033) 4000 9307 / (033) 4000 9308</p>
+            <p>Direct: +91 33 4000 1234</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email Address</h4>
+            <p>info@macrodex.in</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Office Address</h4>
+            <p>15A, Girish Chandra Bose Road,<br>Kolkata – 700 014, West Bengal</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <div class="form-row">
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Email Address" />
+          </div>
+          <input type="tel" placeholder="Phone Number" />
+          <select>
+            <option value="">Select Service</option>
+            <option>Cyber Security</option>
+            <option>Networking Solutions</option>
+            <option>Server & Storage</option>
+            <option>Cloud Services</option>
+            <option>Personal Computing</option>
+            <option>Backup Power</option>
+            <option>Other</option>
+          </select>
+          <textarea placeholder="Your Message / Requirements..."></textarea>
+          <button class="btn-send" onclick="handleSubmit(this)">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="font-size: 26px;">MACRO<span>DEX</span></a>
+      <p>Macrodex is a legacy-to-cloud IT infrastructure company servicing all IT requirements of medium and large organisations across India.</p>
+      <div class="footer-social">
+        <a href="#" class="social-icon">f</a>
+        <a href="#" class="social-icon">𝕏</a>
+        <a href="#" class="social-icon">▶</a>
+        <a href="#" class="social-icon">in</a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#clients">Our Clients</a></li>
+        <li><a href="#alliances">Our Alliances</a></li>
+        <li><a href="#offerings">Our Offerings</a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Our Offerings</h4>
+      <ul>
+        <li><a href="#offerings">Cyber Security</a></li>
+        <li><a href="#offerings">Network Solutions</a></li>
+        <li><a href="#offerings">Server & Storage</a></li>
+        <li><a href="#offerings">Cloud Services</a></li>
+        <li><a href="#offerings">Personal Computing</a></li>
+        <li><a href="#offerings">Backup Power</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Us</h4>
+      <ul>
+        <li><a href="#">Board: (033) 4000 9307</a></li>
+        <li><a href="#">(033) 4000 9308</a></li>
+        <li><a href="#">info@macrodex.in</a></li>
+        <li><a href="#">15A, Girish Chandra Bose Road</a></li>
+        <li><a href="#">Kolkata – 700 014</a></li>
+      </ul>
+      <h4 style="margin-top: 24px;">Newsletter</h4>
+      <p style="font-size: 13px; margin-bottom: 0;">Subscribe to get latest updates</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email" />
+        <button>Go</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Macrodex Technologies Pvt Ltd. All Rights Reserved.</span>
+    <span>Designed with ❤️ in Kolkata</span>
+  </div>
+</footer>
+
+<!-- Scroll to top -->
+<a href="#home" class="scroll-top" id="scrollTop">↑</a>
+
+<script>
+  // SLIDER
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const slidesEl = document.getElementById('slides');
+  let autoSlide;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(n) {
+    current = (n + slides.length) % slides.length;
+    slidesEl.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function changeSlide(dir) { goTo(current + dir); resetAuto(); }
+
+  function resetAuto() {
+    clearInterval(autoSlide);
+    autoSlide = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  resetAuto();
+
+  // MOBILE MENU
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // SCROLL TO TOP
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // COUNTER ANIMATION
+  const counters = document.querySelectorAll('.counter');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = +el.getAttribute('data-target');
+        let count = 0;
+        const step = Math.ceil(target / 60);
+        const timer = setInterval(() => {
+          count = Math.min(count + step, target);
+          el.textContent = count;
+          if (count >= target) clearInterval(timer);
+        }, 30);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => observer.observe(c));
+
+  // CONTACT FORM
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
